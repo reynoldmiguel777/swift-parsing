@@ -14,7 +14,6 @@
             </strong>
             <span>Documentation</span>
         </a>
-        <sup>Beta</sup>
     </header>
 
     <!--
@@ -37,9 +36,16 @@
     <code class="name">Parsers.​Map</code>
 </h1>
 
-<html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Map</span>&lt;<span class="variable">Upstream</span>, <span class="variable">Output</span>&gt;: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a> <span class="keyword">where</span> <span class="type">Upstream</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a></code></pre></body></html>
+<div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Map</span>&lt;<span class="variable">Upstream</span>, <span class="variable">Output</span>&gt;: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a> <span class="keyword">where</span> <span class="type">Upstream</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>  </body></html></code></pre>
+</div>
 <div class="summary" role="doc-abstract">
     <p>A parser that transforms the output of another parser with a given closure.</p>
+
+</div>
+<div class="discussion">
+    <p>You will not typically need to interact with this type directly. Instead you will usually use
+the <code>Parser/map(_:)</code> operation, which constructs this type.</p>
 
 </div>
 <section id="relationships">
@@ -104,9 +110,12 @@
 
         <div role="article" class="initializer" id="parsers.map.init(upstream:transform:)">
     <h3>
-        <code>init(upstream:​transform:​)</code>
+        <code><a href="#parsers.map.init(upstream:transform:)">init(upstream:​transform:​)</a></code>
     </h3>
-    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">upstream</span>: <span class="type">Upstream</span>, <span class="variable">transform</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Upstream</span>.<span class="type">Output</span>) -&gt; <span class="type">Output</span>)</code></pre></body></html>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+    <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">upstream</span>: <span class="type">Upstream</span>, <span class="variable">transform</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Upstream</span>.<span class="type">Output</span>) -&gt; <span class="type">Output</span>)  </body></html></code></pre>
+</div>
 </div>
     </section>
     <section id="properties">
@@ -114,9 +123,11 @@
 
         <div role="article" class="variable" id="parsers.map.upstream">
     <h3>
-        <code>upstream</code>
+        <code><a href="#parsers.map.upstream">upstream</a></code>
     </h3>
-    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">upstream</span>: <span class="type">Upstream</span></code></pre></body></html>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">upstream</span>: <span class="type">Upstream</span></body></html></code></pre>
+</div>
 <div class="summary" role="doc-abstract">
     <p>The parser from which this parser receives output.</p>
 
@@ -124,9 +135,11 @@
 </div>
 <div role="article" class="variable" id="parsers.map.transform">
     <h3>
-        <code>transform</code>
+        <code><a href="#parsers.map.transform">transform</a></code>
     </h3>
-    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">transform</span>: (<span class="type">Upstream</span>.<span class="type">Output</span>) -&gt; <span class="type">Output</span></code></pre></body></html>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">transform</span>: (<span class="type">Upstream</span>.<span class="type">Output</span>) -&gt; <span class="type">Output</span></body></html></code></pre>
+</div>
 <div class="summary" role="doc-abstract">
     <p>The closure that transforms output from the upstream parser.</p>
 
@@ -138,9 +151,13 @@
 
         <div role="article" class="function" id="parsers.map.parse(_:)">
     <h3>
-        <code>parse(_:​)</code>
+        <code><a href="#parsers.map.parse(_:)">parse(_:​)</a></code>
     </h3>
-    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="attribute">@</span><span class="attribute">inline</span>(<span class="variable">__always</span>) <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <span class="type">Upstream</span>.<span class="type">Input</span>) -&gt; <span class="type">Output</span>?</code></pre></body></html>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+    <span class="attribute">@</span><span class="attribute">inline</span>(<span class="variable">__always</span>)
+    <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <span class="type">Upstream</span>.<span class="type">Input</span>) -&gt; <span class="type">Output</span>?  </body></html></code></pre>
+</div>
 </div>
     </section>
 
@@ -151,7 +168,7 @@
 
     <footer>
         <p>
-    Generated on <time datetime="2020-12-29T03:31:45+0000">December 29, 2020</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+    Generated on <time datetime="2021-09-20T18:10:41+0000">September 20, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
