@@ -50,6 +50,14 @@ create a parser for the given input.</p>
         <h2>Structures</h2>
         <dl>
             <dt class="structure">
+    <a href="/swift-parsing/FirstWhere" title="structure - FirstWhere">
+        First​Where
+    </a>
+</dt>
+<dd>
+    
+</dd>
+<dt class="structure">
     <a href="/swift-parsing/Always" title="structure - Always">
         Always
     </a>
@@ -78,15 +86,6 @@ input.</p>
 
 </dd>
 <dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringBoolParser" title="structure - Parsers.SubstringBoolParser">
-        Parsers.​Substring​Bool​Parser
-    </a>
-</dt>
-<dd>
-    <p>A parser that consumes a Boolean value from the beginning of a substring.</p>
-
-</dd>
-<dt class="structure">
     <a href="/swift-parsing/Parsers_CompactMap" title="structure - Parsers.CompactMap">
         Parsers.​Compact​Map
     </a>
@@ -106,15 +105,6 @@ output of its upstream parser.</p>
 
 </dd>
 <dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringDoubleParser" title="structure - Parsers.SubstringDoubleParser">
-        Parsers.​Substring​Double​Parser
-    </a>
-</dt>
-<dd>
-    <p>A parser that consumes a double from the beginning of a substring.</p>
-
-</dd>
-<dt class="structure">
     <a href="/swift-parsing/Parsers_FloatParser" title="structure - Parsers.FloatParser">
         Parsers.​Float​Parser
     </a>
@@ -124,30 +114,12 @@ output of its upstream parser.</p>
 
 </dd>
 <dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringFloatParser" title="structure - Parsers.SubstringFloatParser">
-        Parsers.​Substring​Float​Parser
-    </a>
-</dt>
-<dd>
-    <p>A parser that consumes a float from the beginning of a substring.</p>
-
-</dd>
-<dt class="structure">
     <a href="/swift-parsing/Parsers_Float80Parser" title="structure - Parsers.Float80Parser">
         Parsers.​Float80Parser
     </a>
 </dt>
 <dd>
     <p>A parser that consumes a float from the beginning of a collection of UTF-8 code units.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringFloat80Parser" title="structure - Parsers.SubstringFloat80Parser">
-        Parsers.​Substring​Float80Parser
-    </a>
-</dt>
-<dd>
-    <p>A parser that consumes a float from the beginning of a substring.</p>
 
 </dd>
 <dt class="structure">
@@ -187,14 +159,6 @@ output of its upstream parser.</p>
 
 </dd>
 <dt class="structure">
-    <a href="/swift-parsing/FirstWhere" title="structure - FirstWhere">
-        First​Where
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
     <a href="/swift-parsing/Parsers_FlatMap" title="structure - Parsers.FlatMap">
         Parsers.​Flat​Map
     </a>
@@ -211,16 +175,6 @@ output of its upstream parser.</p>
 <dd>
     <p>A parser that consumes an integer (with an optional leading <code>+</code> or <code>-</code> sign) from the
 beginning of a collection of UTF8 code units.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringIntParser" title="structure - Parsers.SubstringIntParser">
-        Parsers.​Substring​Int​Parser
-    </a>
-</dt>
-<dd>
-    <p>A parser that consumes an integer (with an optional leading <code>+</code> or <code>-</code> sign) from the
-beginning of a substring using a UTF-8 parser.</p>
 
 </dd>
 <dt class="structure">
@@ -383,6 +337,43 @@ parser.</p>
 
 </dd>
 <dt class="structure">
+    <a href="/swift-parsing/Parsers_SubstringToUTF8View" title="structure - Parsers.SubstringToUTF8View">
+        Parsers.​Substring​ToUTF8View
+    </a>
+</dt>
+<dd>
+    <p>A parser that transforms a parser on <code>Substring</code> into a parser on <code>Substring.UTF8View</code>.</p>
+
+</dd>
+<dt class="structure">
+    <a href="/swift-parsing/Parsers_UnicodeScalarViewToUTF8View" title="structure - Parsers.UnicodeScalarViewToUTF8View">
+        Parsers.​Unicode​Scalar​View​ToUTF8View
+    </a>
+</dt>
+<dd>
+    <p>A parser that transforms a parser on <code>Substring.UnicodeScalarView</code> into a parser on
+<code>Substring.UTF8View</code>.</p>
+
+</dd>
+<dt class="structure">
+    <a href="/swift-parsing/Parsers_SubstringToUnicodeScalars" title="structure - Parsers.SubstringToUnicodeScalars">
+        Parsers.​Substring​ToUnicode​Scalars
+    </a>
+</dt>
+<dd>
+    <p>A parser that transforms a parser on <code>Substring</code> into a parser on
+<code>Substring.UnicodeScalarView</code>.</p>
+
+</dd>
+<dt class="structure">
+    <a href="/swift-parsing/Parsers_UTF8ViewToSubstring" title="structure - Parsers.UTF8ViewToSubstring">
+        Parsers.​UTF8View​ToSubstring
+    </a>
+</dt>
+<dd>
+    
+</dd>
+<dt class="structure">
     <a href="/swift-parsing/Parsers_Take2" title="structure - Parsers.Take2">
         Parsers.​Take2
     </a>
@@ -482,50 +473,12 @@ and returns a flattened tuple of the first parser's outputs and the second parse
 
 </dd>
 <dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringToUTF8View" title="structure - Parsers.SubstringToUTF8View">
-        Parsers.​Substring​ToUTF8View
-    </a>
-</dt>
-<dd>
-    <p>A parser that transforms a parser on <code>Substring</code> into a parser on <code>Substring.UTF8View</code>.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_UnicodeScalarViewToUTF8View" title="structure - Parsers.UnicodeScalarViewToUTF8View">
-        Parsers.​Unicode​Scalar​View​ToUTF8View
-    </a>
-</dt>
-<dd>
-    <p>A parser that transforms a parser on <code>Substring.UnicodeScalarView</code> into a parser on
-<code>Substring.UTF8View</code>.</p>
-
-</dd>
-<dt class="structure">
     <a href="/swift-parsing/Parsers_UUIDParser" title="structure - Parsers.UUIDParser">
         Parsers.​UUIDParser
     </a>
 </dt>
 <dd>
     <p>A parser that consumes a UUID from the beginning of a collection of UTF8 code units.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringUUIDParser" title="structure - Parsers.SubstringUUIDParser">
-        Parsers.​Substring​UUIDParser
-    </a>
-</dt>
-<dd>
-    <p>A parser that consumes a UUID from the beginning of a substring using a UTF-8 parser.</p>
-
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringToUnicodeScalars" title="structure - Parsers.SubstringToUnicodeScalars">
-        Parsers.​Substring​ToUnicode​Scalars
-    </a>
-</dt>
-<dd>
-    <p>A parser that transforms a parser on <code>Substring</code> into a parser on
-<code>Substring.UnicodeScalarView</code>.</p>
 
 </dd>
 <dt class="structure">
@@ -588,6 +541,10 @@ and returns a flattened tuple of the first parser's outputs and the second parse
 </dt>
 <dd></dd>
 <dt class="extension">
+    <a href="/swift-parsing/CharacterSet">CharacterSet</a>
+</dt>
+<dd></dd>
+<dt class="extension">
     <a href="/swift-parsing/Double">Double</a>
 </dt>
 <dd></dd>
@@ -630,7 +587,7 @@ and returns a flattened tuple of the first parser's outputs and the second parse
 
     <footer>
         <p>
-    Generated on <time datetime="2021-10-27T21:44:06+0000">October 27, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2021-12-06T22:51:42+0000">December 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>

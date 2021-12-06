@@ -25,7 +25,7 @@
     <nav>
         <div class="wrapper">
             <h2>On This Page</h2>
-            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#parsers.always">Always</a></li><li class="typealias"><a href="#parsers.anyparser">Any​Parser</a></li><li class="typealias"><a href="#parsers.conditional">Conditional</a></li><li class="typealias"><a href="#parsers.end">End</a></li><li class="typealias"><a href="#parsers.fail">Fail</a></li><li class="typealias"><a href="#parsers.first">First</a></li><li class="typealias"><a href="#parsers.firstwhere">First​Where</a></li><li class="typealias"><a href="#parsers.lazy">Lazy</a></li><li class="typealias"><a href="#parsers.many">Many</a></li><li class="typealias"><a href="#parsers.newline">Newline</a></li><li class="typealias"><a href="#parsers.oneofmany">One​OfMany</a></li><li class="typealias"><a href="#parsers.prefix">Prefix</a></li><li class="typealias"><a href="#parsers.prefixthrough">Prefix​Through</a></li><li class="typealias"><a href="#parsers.prefixupto">Prefix​UpTo</a></li><li class="typealias"><a href="#parsers.rest">Rest</a></li><li class="typealias"><a href="#parsers.skip">Skip</a></li><li class="typealias"><a href="#parsers.startswith">Starts​With</a></li><li class="typealias"><a href="#parsers.whitespace">Whitespace</a></li></ul></li></ol>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#parsers.substringboolparser">Substring​Bool​Parser</a></li><li class="typealias"><a href="#parsers.substringdoubleparser">Substring​Double​Parser</a></li><li class="typealias"><a href="#parsers.substringfloat80parser">Substring​Float80Parser</a></li><li class="typealias"><a href="#parsers.substringfloatparser">Substring​Float​Parser</a></li><li class="typealias"><a href="#parsers.substringintparser">Substring​Int​Parser</a></li><li class="typealias"><a href="#parsers.substringuuidparser">Substring​UUIDParser</a></li><li class="typealias"><a href="#parsers.firstwhere">First​Where</a></li><li class="typealias"><a href="#parsers.always">Always</a></li><li class="typealias"><a href="#parsers.anyparser">Any​Parser</a></li><li class="typealias"><a href="#parsers.conditional">Conditional</a></li><li class="typealias"><a href="#parsers.end">End</a></li><li class="typealias"><a href="#parsers.fail">Fail</a></li><li class="typealias"><a href="#parsers.first">First</a></li><li class="typealias"><a href="#parsers.lazy">Lazy</a></li><li class="typealias"><a href="#parsers.many">Many</a></li><li class="typealias"><a href="#parsers.newline">Newline</a></li><li class="typealias"><a href="#parsers.oneofmany">One​OfMany</a></li><li class="typealias"><a href="#parsers.prefix">Prefix</a></li><li class="typealias"><a href="#parsers.prefixthrough">Prefix​Through</a></li><li class="typealias"><a href="#parsers.prefixupto">Prefix​UpTo</a></li><li class="typealias"><a href="#parsers.rest">Rest</a></li><li class="typealias"><a href="#parsers.skip">Skip</a></li><li class="typealias"><a href="#parsers.startswith">Starts​With</a></li><li class="typealias"><a href="#parsers.whitespace">Whitespace</a></li></ul></li></ol>
         </div>
     </nav>
 
@@ -57,9 +57,6 @@ classes or structures that extend this enumeration. For example, the <code>map</
     <dt class="structure"><code><a href="/swift-parsing/Parsers_BoolParser">Parsers.BoolParser</a></code></dt>
 <dd><p>A parser that consumes a Boolean value from the beginning of a collection of UTF-8 code units.</p>
 </dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringBoolParser">Parsers.SubstringBoolParser</a></code></dt>
-<dd><p>A parser that consumes a Boolean value from the beginning of a substring.</p>
-</dd>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_CompactMap">Parsers.CompactMap</a></code></dt>
 <dd><p>A parser that outputs the non-<code>nil</code> results of calling the given transformation with the
 output of its upstream parser.</p>
@@ -67,20 +64,11 @@ output of its upstream parser.</p>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_DoubleParser">Parsers.DoubleParser</a></code></dt>
 <dd><p>A parser that consumes a double from the beginning of a collection of UTF-8 code units.</p>
 </dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringDoubleParser">Parsers.SubstringDoubleParser</a></code></dt>
-<dd><p>A parser that consumes a double from the beginning of a substring.</p>
-</dd>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_FloatParser">Parsers.FloatParser</a></code></dt>
 <dd><p>A parser that consumes a float from the beginning of a collection of UTF-8 code units.</p>
 </dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringFloatParser">Parsers.SubstringFloatParser</a></code></dt>
-<dd><p>A parser that consumes a float from the beginning of a substring.</p>
-</dd>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_Float80Parser">Parsers.Float80Parser</a></code></dt>
 <dd><p>A parser that consumes a float from the beginning of a collection of UTF-8 code units.</p>
-</dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringFloat80Parser">Parsers.SubstringFloat80Parser</a></code></dt>
-<dd><p>A parser that consumes a float from the beginning of a substring.</p>
 </dd>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_Filter">Parsers.Filter</a></code></dt>
 <dd><p>A parser that filters the output of an upstream parser when it does not satisfy a predicate.</p>
@@ -91,10 +79,6 @@ output of its upstream parser.</p>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_IntParser">Parsers.IntParser</a></code></dt>
 <dd><p>A parser that consumes an integer (with an optional leading <code>+</code> or <code>-</code> sign) from the
 beginning of a collection of UTF8 code units.</p>
-</dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringIntParser">Parsers.SubstringIntParser</a></code></dt>
-<dd><p>A parser that consumes an integer (with an optional leading <code>+</code> or <code>-</code> sign) from the
-beginning of a substring using a UTF-8 parser.</p>
 </dd>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_Map">Parsers.Map</a></code></dt>
 <dd><p>A parser that transforms the output of another parser with a given closure.</p>
@@ -123,6 +107,19 @@ parser.</p>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_Stream">Parsers.Stream</a></code></dt>
 <dd><p>A parser that can parse streams of input.</p>
 </dd>
+<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringToUTF8View">Parsers.SubstringToUTF8View</a></code></dt>
+<dd><p>A parser that transforms a parser on <code>Substring</code> into a parser on <code>Substring.UTF8View</code>.</p>
+</dd>
+<dt class="structure"><code><a href="/swift-parsing/Parsers_UnicodeScalarViewToUTF8View">Parsers.UnicodeScalarViewToUTF8View</a></code></dt>
+<dd><p>A parser that transforms a parser on <code>Substring.UnicodeScalarView</code> into a parser on
+<code>Substring.UTF8View</code>.</p>
+</dd>
+<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringToUnicodeScalars">Parsers.SubstringToUnicodeScalars</a></code></dt>
+<dd><p>A parser that transforms a parser on <code>Substring</code> into a parser on
+<code>Substring.UnicodeScalarView</code>.</p>
+</dd>
+<dt class="structure"><code><a href="/swift-parsing/Parsers_UTF8ViewToSubstring">Parsers.UTF8ViewToSubstring</a></code></dt>
+<dd></dd>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_Take2">Parsers.Take2</a></code></dt>
 <dd><p>A parser that runs two parsers, one after the other, and returns both outputs in a tuple.</p>
 </dd>
@@ -162,29 +159,103 @@ and returns a flattened tuple of the first parser's outputs and the second parse
 <dd><p>A parser that runs a parser of a tuple of outputs and another parser, one after the other,
 and returns a flattened tuple of the first parser's outputs and the second parser's output.</p>
 </dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringToUTF8View">Parsers.SubstringToUTF8View</a></code></dt>
-<dd><p>A parser that transforms a parser on <code>Substring</code> into a parser on <code>Substring.UTF8View</code>.</p>
-</dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_UnicodeScalarViewToUTF8View">Parsers.UnicodeScalarViewToUTF8View</a></code></dt>
-<dd><p>A parser that transforms a parser on <code>Substring.UnicodeScalarView</code> into a parser on
-<code>Substring.UTF8View</code>.</p>
-</dd>
 <dt class="structure"><code><a href="/swift-parsing/Parsers_UUIDParser">Parsers.UUIDParser</a></code></dt>
 <dd><p>A parser that consumes a UUID from the beginning of a collection of UTF8 code units.</p>
-</dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringUUIDParser">Parsers.SubstringUUIDParser</a></code></dt>
-<dd><p>A parser that consumes a UUID from the beginning of a substring using a UTF-8 parser.</p>
-</dd>
-<dt class="structure"><code><a href="/swift-parsing/Parsers_SubstringToUnicodeScalars">Parsers.SubstringToUnicodeScalars</a></code></dt>
-<dd><p>A parser that transforms a parser on <code>Substring</code> into a parser on
-<code>Substring.UnicodeScalarView</code>.</p>
 </dd>
 </dl>
 </section>
     <section id="nested type aliases">
         <h2>Nested Type Aliases</h2>
 
-        <div role="article" class="typealias" id="parsers.always">
+        <div role="article" class="typealias" id="parsers.substringboolparser">
+    <h3>
+        <code><a href="#parsers.substringboolparser">Substring​Bool​Parser</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(
+    *, <span class="variable">deprecated</span>,
+    <span class="variable">message</span>:
+      <span class="string literal">"'Bool.parser(of: Substring.self)' now returns 'Parsers.UTF8ViewToSubstring&lt;Parsers.BoolParser&lt;Substring.UTF8View&gt;&gt;'"</span>
+  )
+  <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">SubstringBoolParser</span> = <span class="type">UTF8ViewToSubstring</span>&lt;<span class="type">BoolParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>&gt;&gt;</body></html></code></pre>
+</div>
+</div>
+<div role="article" class="typealias" id="parsers.substringdoubleparser">
+    <h3>
+        <code><a href="#parsers.substringdoubleparser">Substring​Double​Parser</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(
+    *, <span class="variable">deprecated</span>,
+    <span class="variable">message</span>:
+      <span class="string literal">"'Double.parser(of: Substring.self)' now returns 'Parsers.UTF8ViewToSubstring&lt;Parsers.DoubleParser&lt;Substring.UTF8View&gt;&gt;'"</span>
+  )
+  <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">SubstringDoubleParser</span> = <span class="type">UTF8ViewToSubstring</span>&lt;<span class="type">DoubleParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>&gt;&gt;</body></html></code></pre>
+</div>
+</div>
+<div role="article" class="typealias" id="parsers.substringfloat80parser">
+    <h3>
+        <code><a href="#parsers.substringfloat80parser">Substring​Float80Parser</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(
+      *, <span class="variable">deprecated</span>,
+      <span class="variable">message</span>:
+        <span class="string literal">"'Float80.parser(of: Substring.self)' now returns 'Parsers.UTF8ViewToSubstring&lt;Parsers.Float80Parser&lt;Substring.UTF8View&gt;&gt;'"</span>
+    )
+    <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">SubstringFloat80Parser</span> = <span class="type">UTF8ViewToSubstring</span>&lt;<span class="type">Float80Parser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>&gt;&gt;</body></html></code></pre>
+</div>
+</div>
+<div role="article" class="typealias" id="parsers.substringfloatparser">
+    <h3>
+        <code><a href="#parsers.substringfloatparser">Substring​Float​Parser</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(
+    *, <span class="variable">deprecated</span>,
+    <span class="variable">message</span>:
+      <span class="string literal">"'Float.parser(of: Substring.self)' now returns 'Parsers.UTF8ViewToSubstring&lt;Parsers.FloatParser&lt;Substring.UTF8View&gt;&gt;'"</span>
+  )
+  <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">SubstringFloatParser</span> = <span class="type">UTF8ViewToSubstring</span>&lt;<span class="type">FloatParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>&gt;&gt;</body></html></code></pre>
+</div>
+</div>
+<div role="article" class="typealias" id="parsers.substringintparser">
+    <h3>
+        <code><a href="#parsers.substringintparser">Substring​Int​Parser</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(
+    *, <span class="variable">deprecated</span>,
+    <span class="variable">message</span>:
+      <span class="string literal">"'FixedWidthInteger.parser(of: Substring.self)' now returns 'Parsers.UTF8ViewToSubstring&lt;Parsers.IntParser&lt;Substring.UTF8View, FixedWidthInteger&gt;&gt;'"</span>
+  )
+  <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">SubstringIntParser</span>&lt;<span class="variable">Output</span>&gt; = <span class="type">UTF8ViewToSubstring</span>&lt;
+    <span class="type">IntParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>, <span class="type">Output</span>&gt;
+  &gt; <span class="keyword">where</span> <span class="type">Output</span>: <span class="type">FixedWidthInteger</span></body></html></code></pre>
+</div>
+</div>
+<div role="article" class="typealias" id="parsers.substringuuidparser">
+    <h3>
+        <code><a href="#parsers.substringuuidparser">Substring​UUIDParser</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(
+    *, <span class="variable">deprecated</span>,
+    <span class="variable">message</span>:
+      <span class="string literal">"'UUID.parser(of: Substring.self)' now returns 'Parsers.UTF8ViewToSubstring&lt;Parsers.UUIDParser&lt;Substring.UTF8View&gt;&gt;'"</span>
+  )
+  <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">SubstringUUIDParser</span>&lt;<span class="variable">Output</span>&gt; = <span class="type">UTF8ViewToSubstring</span>&lt;<span class="type">UUIDParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>&gt;&gt;</body></html></code></pre>
+</div>
+</div>
+<div role="article" class="typealias" id="parsers.firstwhere">
+    <h3>
+        <code><a href="#parsers.firstwhere">First​Where</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">FirstWhere</span> = <span class="type">Parsing</span>.<a href="/swift-parsing/FirstWhere"><span class="type">FirstWhere</span></a></body></html></code></pre>
+</div>
+</div>
+<div role="article" class="typealias" id="parsers.always">
     <h3>
         <code><a href="#parsers.always">Always</a></code>
     </h3>
@@ -230,14 +301,6 @@ and returns a flattened tuple of the first parser's outputs and the second parse
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">First</span> = <span class="type">Parsing</span>.<a href="/swift-parsing/First"><span class="type">First</span></a></body></html></code></pre>
-</div>
-</div>
-<div role="article" class="typealias" id="parsers.firstwhere">
-    <h3>
-        <code><a href="#parsers.firstwhere">First​Where</a></code>
-    </h3>
-    <div class="declaration">
-<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">FirstWhere</span> = <span class="type">Parsing</span>.<a href="/swift-parsing/FirstWhere"><span class="type">FirstWhere</span></a></body></html></code></pre>
 </div>
 </div>
 <div role="article" class="typealias" id="parsers.lazy">
@@ -337,7 +400,7 @@ and returns a flattened tuple of the first parser's outputs and the second parse
 
     <footer>
         <p>
-    Generated on <time datetime="2021-10-27T21:44:06+0000">October 27, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2021-12-06T22:51:42+0000">December 6, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
