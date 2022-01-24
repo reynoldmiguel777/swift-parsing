@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parsing - OneOfBuilder</title>
+    <link rel="stylesheet" type="text/css" href="/swift-parsing/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/swift-parsing/">
+            <strong>
+                Parsing
+            </strong>
+            <span>Documentation</span>
+        </a>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#methods">Methods</a><ul><li class="function"><a href="#oneofbuilder.buildarray(_:)">build​Array(_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:)">build​Block(_:​)</a></li><li class="function"><a href="#oneofbuilder.buildeither(first:)">build​Either(first:​)</a></li><li class="function"><a href="#oneofbuilder.buildeither(second:)">build​Either(second:​)</a></li><li class="function"><a href="#oneofbuilder.buildif(_:)">build​If(_:​)</a></li><li class="function"><a href="#oneofbuilder.buildlimitedavailability(_:)">build​Limited​Availability(_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:)">build​Block(_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:)">build​Block(_:​_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:_:)">build​Block(_:​_:​_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​_:​_:​)</a></li><li class="function"><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​_:​_:​_:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Enumeration</small>
+    <code class="name">One​OfBuilder</code>
+</h1>
+
+<div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="type">resultBuilder</span>
+<span class="keyword">public</span> <span class="keyword">enum</span> <span class="type">OneOfBuilder</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>A custom parameter attribute that constructs a parser that attempts to run a number of parsers,
+one after the other, till one succeeds with an output.</p>
+
+</div>
+<div class="discussion">
+    <p>See <code>OneOf</code> for an entry point into this builder.</p>
+
+</div>
+
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="oneofbuilder.buildarray(_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildarray(_:)">build​Array(_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildArray</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parsers</span>: [<span class="type">P</span>]) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOfMany</span>&lt;<span class="type">P</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:)">build​Block(_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+  <span class="keyword">static</span> <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>) -&gt; <span class="type">P</span> <span class="keyword">where</span> <span class="type">P</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildeither(first:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildeither(first:)">build​Either(first:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildEither</span>&lt;<span class="variable">TrueParser</span>, <span class="variable">FalseParser</span>&gt;(
+    <span class="variable">first</span> <span class="variable">parser</span>: <span class="type">TrueParser</span>
+  ) -&gt; <a href="/swift-parsing/Conditional"><span class="type">Conditional</span></a>&lt;<span class="type">TrueParser</span>, <span class="type">FalseParser</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildeither(second:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildeither(second:)">build​Either(second:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildEither</span>&lt;<span class="variable">TrueParser</span>, <span class="variable">FalseParser</span>&gt;(
+    <span class="variable">second</span> <span class="variable">parser</span>: <span class="type">FalseParser</span>
+  ) -&gt; <a href="/swift-parsing/Conditional"><span class="type">Conditional</span></a>&lt;<span class="type">TrueParser</span>, <span class="type">FalseParser</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildif(_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildif(_:)">build​If(_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildIf</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?) -&gt; <a href="/swift-parsing/Conditional"><span class="type">Conditional</span></a>&lt;<span class="type">P</span>, <a href="/swift-parsing/Fail"><span class="type">Fail</span></a>&lt;<span class="type">P</span>.<span class="type">Input</span>, <span class="type">P</span>.<span class="type">Output</span>&gt;&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildlimitedavailability(_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildlimitedavailability(_:)">build​Limited​Availability(_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildLimitedAvailability</span>&lt;<span class="variable">P</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?
+  ) -&gt; <a href="/swift-parsing/Conditional"><span class="type">Conditional</span></a>&lt;<span class="type">P</span>, <a href="/swift-parsing/Fail"><span class="type">Fail</span></a>&lt;<span class="type">P</span>.<span class="type">Input</span>, <span class="type">P</span>.<span class="type">Output</span>&gt;&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:)">build​Block(_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf2</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:)">build​Block(_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf3</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:_:)">build​Block(_:​_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>, <span class="variable">P3</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>, <span class="keyword">_</span> <span class="variable">p3</span>: <span class="type">P3</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf4</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>, <span class="type">P3</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>, <span class="variable">P3</span>, <span class="variable">P4</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>, <span class="keyword">_</span> <span class="variable">p3</span>: <span class="type">P3</span>, <span class="keyword">_</span> <span class="variable">p4</span>: <span class="type">P4</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf5</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>, <span class="type">P3</span>, <span class="type">P4</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>, <span class="variable">P3</span>, <span class="variable">P4</span>, <span class="variable">P5</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>, <span class="keyword">_</span> <span class="variable">p3</span>: <span class="type">P3</span>, <span class="keyword">_</span> <span class="variable">p4</span>: <span class="type">P4</span>, <span class="keyword">_</span> <span class="variable">p5</span>: <span class="type">P5</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf6</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>, <span class="type">P3</span>, <span class="type">P4</span>, <span class="type">P5</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:_:_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>, <span class="variable">P3</span>, <span class="variable">P4</span>, <span class="variable">P5</span>, <span class="variable">P6</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>, <span class="keyword">_</span> <span class="variable">p3</span>: <span class="type">P3</span>, <span class="keyword">_</span> <span class="variable">p4</span>: <span class="type">P4</span>, <span class="keyword">_</span> <span class="variable">p5</span>: <span class="type">P5</span>, <span class="keyword">_</span> <span class="variable">p6</span>: <span class="type">P6</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf7</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>, <span class="type">P3</span>, <span class="type">P4</span>, <span class="type">P5</span>, <span class="type">P6</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:_:_:_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>, <span class="variable">P3</span>, <span class="variable">P4</span>, <span class="variable">P5</span>, <span class="variable">P6</span>, <span class="variable">P7</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>, <span class="keyword">_</span> <span class="variable">p3</span>: <span class="type">P3</span>, <span class="keyword">_</span> <span class="variable">p4</span>: <span class="type">P4</span>, <span class="keyword">_</span> <span class="variable">p5</span>: <span class="type">P5</span>, <span class="keyword">_</span> <span class="variable">p6</span>: <span class="type">P6</span>, <span class="keyword">_</span> <span class="variable">p7</span>: <span class="type">P7</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf8</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>, <span class="type">P3</span>, <span class="type">P4</span>, <span class="type">P5</span>, <span class="type">P6</span>, <span class="type">P7</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:_:_:_:_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>, <span class="variable">P3</span>, <span class="variable">P4</span>, <span class="variable">P5</span>, <span class="variable">P6</span>, <span class="variable">P7</span>, <span class="variable">P8</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>, <span class="keyword">_</span> <span class="variable">p3</span>: <span class="type">P3</span>, <span class="keyword">_</span> <span class="variable">p4</span>: <span class="type">P4</span>, <span class="keyword">_</span> <span class="variable">p5</span>: <span class="type">P5</span>, <span class="keyword">_</span> <span class="variable">p6</span>: <span class="type">P6</span>, <span class="keyword">_</span> <span class="variable">p7</span>: <span class="type">P7</span>, <span class="keyword">_</span> <span class="variable">p8</span>: <span class="type">P8</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf9</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>, <span class="type">P3</span>, <span class="type">P4</span>, <span class="type">P5</span>, <span class="type">P6</span>, <span class="type">P7</span>, <span class="type">P8</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="function" id="oneofbuilder.buildblock(_:_:_:_:_:_:_:_:_:_:)">
+    <h3>
+        <code><a href="#oneofbuilder.buildblock(_:_:_:_:_:_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​_:​_:​_:​_:​_:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P0</span>, <span class="variable">P1</span>, <span class="variable">P2</span>, <span class="variable">P3</span>, <span class="variable">P4</span>, <span class="variable">P5</span>, <span class="variable">P6</span>, <span class="variable">P7</span>, <span class="variable">P8</span>, <span class="variable">P9</span>&gt;(
+    <span class="keyword">_</span> <span class="variable">p0</span>: <span class="type">P0</span>, <span class="keyword">_</span> <span class="variable">p1</span>: <span class="type">P1</span>, <span class="keyword">_</span> <span class="variable">p2</span>: <span class="type">P2</span>, <span class="keyword">_</span> <span class="variable">p3</span>: <span class="type">P3</span>, <span class="keyword">_</span> <span class="variable">p4</span>: <span class="type">P4</span>, <span class="keyword">_</span> <span class="variable">p5</span>: <span class="type">P5</span>, <span class="keyword">_</span> <span class="variable">p6</span>: <span class="type">P6</span>, <span class="keyword">_</span> <span class="variable">p7</span>: <span class="type">P7</span>, <span class="keyword">_</span> <span class="variable">p8</span>: <span class="type">P8</span>,
+    <span class="keyword">_</span> <span class="variable">p9</span>: <span class="type">P9</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OneOf10</span>&lt;<span class="type">P0</span>, <span class="type">P1</span>, <span class="type">P2</span>, <span class="type">P3</span>, <span class="type">P4</span>, <span class="type">P5</span>, <span class="type">P6</span>, <span class="type">P7</span>, <span class="type">P8</span>, <span class="type">P9</span>&gt;  </body></html></code></pre>
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2022-01-24T18:11:10+0000">January 24, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+</p>
+    </footer>
+</body>
+</html>

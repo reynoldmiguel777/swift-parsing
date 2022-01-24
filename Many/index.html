@@ -25,7 +25,7 @@
     <nav>
         <div class="wrapper">
             <h2>On This Page</h2>
-            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#many.upstream">Upstream</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#many.init(_:into:atleast:atmost:separator:_:)">init(_:​into:​at​Least:​at​Most:​separator:​_:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#many.upstream">upstream</a></li><li class="variable"><a href="#many.initialresult">initial​Result</a></li><li class="variable"><a href="#many.maximum">maximum</a></li><li class="variable"><a href="#many.minimum">minimum</a></li><li class="variable"><a href="#many.separator">separator</a></li><li class="variable"><a href="#many.updateaccumulatingresult">update​Accumulating​Result</a></li><li class="variable"><a href="#many.element">element</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#many.parse(_:)">parse(_:​)</a></li></ul></li></ol>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#many.upstream">Upstream</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#many.init(_:into:atleast:atmost:separator:_:)">init(_:​into:​at​Least:​at​Most:​separator:​_:​)</a></li><li class="initializer"><a href="#many.init(into:atleast:atmost:_:element:separator:)">init(into:​at​Least:​at​Most:​_:​element:​separator:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#many.upstream">upstream</a></li><li class="variable"><a href="#many.element">element</a></li><li class="variable"><a href="#many.initialresult">initial​Result</a></li><li class="variable"><a href="#many.maximum">maximum</a></li><li class="variable"><a href="#many.minimum">minimum</a></li><li class="variable"><a href="#many.separator">separator</a></li><li class="variable"><a href="#many.updateaccumulatingresult">update​Accumulating​Result</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#many.parse(_:)">parse(_:​)</a></li></ul></li></ol>
         </div>
     </nav>
 
@@ -53,7 +53,11 @@ of the outputs.</p>
 integers:</p>
 
 <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">input</span> = <span class="string literal">"</span><span class="string literal">1,2,3</span><span class="string literal">"</span>[...]
-<span class="keyword">let</span> <span class="variable">output</span> = <span class="variable">Many</span>(<span class="variable">Int</span>.<span class="variable">parser</span>(), <span class="variable">separator</span>: <span class="string literal">"</span><span class="string literal">,</span><span class="string literal">"</span>).<span class="variable">parse</span>(&amp;<span class="variable">input</span>)
+<span class="keyword">let</span> <span class="variable">output</span> = <span class="variable">Many</span> {
+  <span class="variable">Int</span>.<span class="variable">parser</span>()
+} <span class="variable">separator</span>: {
+  <span class="string literal">"</span><span class="string literal">,</span><span class="string literal">"</span>
+}.<span class="variable">parse</span>(&amp;<span class="variable">input</span>)
 <span class="variable">precondition</span>(<span class="variable">input</span> == <span class="string literal">"</span><span class="string literal"/><span class="string literal">"</span>)
 <span class="variable">precondition</span>(<span class="variable">output</span> == [<span class="number literal">1</span>, <span class="number literal">2</span>, <span class="number literal">3</span>])
 </code></pre></body></html>
@@ -61,12 +65,11 @@ integers:</p>
 much like <code>Sequence.reduce(into:_)</code>. We could, for example, sum the numbers as we parse them
 instead of accumulating each value in an array:</p>
 
-<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">sumParser</span> = <span class="variable">Many</span>(
-  <span class="variable">Int</span>.<span class="variable">parser</span>(<span class="variable">of</span>: <span class="type">Substring</span>.<span class="keyword">self</span>),
-  <span class="variable">into</span>: <span class="number literal">0</span>,
-  <span class="variable">separator</span>: <span class="string literal">"</span><span class="string literal">,</span><span class="string literal">"</span>,
-  +=
-)
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">sumParser</span> = <span class="variable">Many</span>(<span class="variable">into</span>: <span class="number literal">0</span>, +=) {
+  <span class="variable">Int</span>.<span class="variable">parser</span>()
+} <span class="variable">separator</span>: {
+  <span class="string literal">"</span><span class="string literal">,</span><span class="string literal">"</span>
+}
 <span class="keyword">var</span> <span class="variable">input</span> = <span class="string literal">"</span><span class="string literal">1,2,3</span><span class="string literal">"</span>[...]
 <span class="keyword">let</span> <span class="variable">output</span> = <span class="variable">Many</span>(<span class="variable">Int</span>.<span class="variable">parser</span>(), <span class="variable">into</span>: <span class="number literal">0</span>, <span class="variable">separator</span>: <span class="string literal">"</span><span class="string literal">,</span><span class="string literal">"</span>).<span class="variable">parse</span>(&amp;<span class="variable">input</span>)
 <span class="variable">precondition</span>(<span class="variable">input</span> == <span class="string literal">"</span><span class="string literal"/><span class="string literal">"</span>)
@@ -81,11 +84,11 @@ instead of accumulating each value in an array:</p>
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Generated by graphviz version 2.40.1 (20161225.0304)
  -->
-<!-- Title: %23 Pages: 1 -->
+<!-- Title: %1051 Pages: 1 -->
 <svg width="872pt" height="116pt"
  viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
-<title>%23</title>
+<title>%1051</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
 <!-- Many -->
 <g id="node1" class="node structure current">
@@ -145,7 +148,12 @@ instead of accumulating each value in an array:</p>
         <code><a href="#many.init(_:into:atleast:atmost:separator:_:)">init(_:​into:​at​Least:​at​Most:​separator:​_:​)</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">macOS</span> <span class="number literal">0</span>, <span class="keyword">iOS</span> <span class="number literal">0</span>, <span class="keyword">watchOS</span> <span class="number literal">0</span>, <span class="keyword">tvOS</span> <span class="number literal">0</span>, *)
+  <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">deprecated</span>: <span class="number literal">100000</span>, <span class="variable">message</span>: <span class="string literal">"Use the '@ParserBuilder' initializer instead."</span>)
+  <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">iOS</span>, <span class="variable">deprecated</span>: <span class="number literal">100000</span>, <span class="variable">message</span>: <span class="string literal">"Use the '@ParserBuilder' initializer instead."</span>)
+  <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">deprecated</span>: <span class="number literal">100000</span>, <span class="variable">message</span>: <span class="string literal">"Use the '@ParserBuilder' initializer instead."</span>)
+  <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">deprecated</span>: <span class="number literal">100000</span>, <span class="variable">message</span>: <span class="string literal">"Use the '@ParserBuilder' initializer instead."</span>)
+  <span class="attribute">@</span><span class="attribute">inlinable</span>
   <span class="keyword">public</span> <span class="keyword">init</span>(
     <span class="keyword">_</span> <span class="variable">element</span>: <span class="type">Element</span>,
     <span class="variable">into</span> <span class="variable">initialResult</span>: <span class="type">Result</span>,
@@ -153,6 +161,22 @@ instead of accumulating each value in an array:</p>
     <span class="variable">atMost</span> <span class="variable">maximum</span>: <span class="type">Int</span> = .<span class="variable">max</span>,
     <span class="variable">separator</span>: <span class="type">Separator</span>,
     <span class="keyword">_</span> <span class="variable">updateAccumulatingResult</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="keyword">inout</span> <span class="type">Result</span>, <span class="type">Element</span>.<span class="type">Output</span>) -&gt; <span class="type">Void</span>
+  )  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="initializer" id="many.init(into:atleast:atmost:_:element:separator:)">
+    <h3>
+        <code><a href="#many.init(into:atleast:atmost:_:element:separator:)">init(into:​at​Least:​at​Most:​_:​element:​separator:​)</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
+  <span class="keyword">public</span> <span class="keyword">init</span>(
+    <span class="variable">into</span> <span class="variable">initialResult</span>: <span class="type">Result</span>,
+    <span class="variable">atLeast</span> <span class="variable">minimum</span>: <span class="type">Int</span> = <span class="number literal">0</span>,
+    <span class="variable">atMost</span> <span class="variable">maximum</span>: <span class="type">Int</span> = .<span class="variable">max</span>,
+    <span class="keyword">_</span> <span class="variable">updateAccumulatingResult</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="keyword">inout</span> <span class="type">Result</span>, <span class="type">Element</span>.<span class="type">Output</span>) -&gt; <span class="type">Void</span>,
+    <span class="attribute">@</span><a href="/swift-parsing/ParserBuilder"><span class="type">ParserBuilder</span></a> <span class="variable">element</span>: () -&gt; <span class="type">Element</span>,
+    <span class="attribute">@</span><a href="/swift-parsing/ParserBuilder"><span class="type">ParserBuilder</span></a> <span class="variable">separator</span>: () -&gt; <span class="type">Separator</span>
   )  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -172,9 +196,9 @@ number of times, accumulating the outputs into a result with a given closure.</p
   </thead>
   <tbody>
     <tr>
-    <th>element</th>
-    <td><code class="type">Element</code></td>
-    <td><p>A parser to run multiple times to accumulate into a result.</p>
+    <th>initial​Result</th>
+    <td><code class="type">Result</code></td>
+    <td><p>The value to use as the initial accumulating value.</p>
 </td>
 </tr>
 <tr>
@@ -190,15 +214,21 @@ number of times, accumulating the outputs into a result with a given closure.</p
 </td>
 </tr>
 <tr>
-    <th>separator</th>
-    <td><code class="type">Separator</code></td>
-    <td><p>A parser that consumes input between each parsed output.</p>
-</td>
-</tr>
-<tr>
     <th>update​Accumulating​Result</th>
     <td><code class="type">@escaping (inout Result, Element.​Output) -&gt; Void</code></td>
     <td><p>A closure that updates the accumulating result with each output of the element parser.</p>
+</td>
+</tr>
+<tr>
+    <th>element</th>
+    <td><code class="type">() -&gt; Element</code></td>
+    <td><p>A parser to run multiple times to accumulate into a result.</p>
+</td>
+</tr>
+<tr>
+    <th>separator</th>
+    <td><code class="type">() -&gt; Separator</code></td>
+    <td><p>A parser that consumes input between each parsed output.</p>
 </td>
 </tr>
   </tbody>
@@ -215,6 +245,14 @@ number of times, accumulating the outputs into a result with a given closure.</p
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">available</span>(*, <span class="variable">deprecated</span>, <span class="variable">renamed</span>: <span class="string literal">"element"</span>)
   <span class="keyword">public</span> <span class="keyword">var</span> <span class="variable">upstream</span>: <span class="type">Upstream</span>  </body></html></code></pre>
+</div>
+</div>
+<div role="article" class="variable" id="many.element">
+    <h3>
+        <code><a href="#many.element">element</a></code>
+    </h3>
+    <div class="declaration">
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">element</span>: <span class="type">Element</span></body></html></code></pre>
 </div>
 </div>
 <div role="article" class="variable" id="many.initialresult">
@@ -246,7 +284,7 @@ number of times, accumulating the outputs into a result with a given closure.</p
         <code><a href="#many.separator">separator</a></code>
     </h3>
     <div class="declaration">
-<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">separator</span>: <span class="type">Separator</span>? </body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">separator</span>: <span class="type">Separator</span></body></html></code></pre>
 </div>
 </div>
 <div role="article" class="variable" id="many.updateaccumulatingresult">
@@ -255,14 +293,6 @@ number of times, accumulating the outputs into a result with a given closure.</p
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">updateAccumulatingResult</span>: (<span class="keyword">inout</span> <span class="type">Result</span>, <span class="type">Element</span>.<span class="type">Output</span>) -&gt; <span class="type">Void</span></body></html></code></pre>
-</div>
-</div>
-<div role="article" class="variable" id="many.element">
-    <h3>
-        <code><a href="#many.element">element</a></code>
-    </h3>
-    <div class="declaration">
-<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">let</span> <span class="variable">element</span>: <span class="type">Element</span></body></html></code></pre>
 </div>
 </div>
     </section>
@@ -287,7 +317,7 @@ number of times, accumulating the outputs into a result with a given closure.</p
 
     <footer>
         <p>
-    Generated on <time datetime="2022-01-06T15:12:52+0000">January 6, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2022-01-24T18:11:11+0000">January 24, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>

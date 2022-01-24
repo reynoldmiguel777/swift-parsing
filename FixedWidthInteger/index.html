@@ -47,7 +47,7 @@
   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">parser</span>&lt;<span class="variable">Input</span>&gt;(
     <span class="variable">of</span> <span class="variable">inputType</span>: <span class="type">Input</span>.<span class="type">Type</span> = <span class="variable">Input</span>.<span class="keyword">self</span>,
     <span class="variable">isSigned</span>: <span class="type">Bool</span> = <span class="keyword">true</span>,
-    <span class="variable">radix</span>: <span class="keyword">Self</span> = <span class="number literal">10</span>
+    <span class="variable">radix</span>: <span class="type">Int</span> = <span class="number literal">10</span>
   ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">IntParser</span>&lt;<span class="type">Input</span>, <span class="keyword">Self</span>&gt;  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
@@ -87,7 +87,7 @@ beginning of a collection of UTF-8 code units.</p>
 </tr>
 <tr>
     <th>radix</th>
-    <td><code class="type">Self</code></td>
+    <td><code class="type">Int</code></td>
     <td><p>The radix, or base, to use for converting text to an integer value. <code>radix</code> must be in the range <code>2...36</code>.</p>
 </td>
 </tr>
@@ -104,11 +104,11 @@ beginning of a collection of UTF-8 code units.</p>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">_disfavoredOverload</span>
   <span class="attribute">@</span><span class="attribute">inlinable</span>
-  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">parser</span>&lt;<span class="variable">Input</span>&gt;(
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">parser</span>(
     <span class="variable">of</span> <span class="variable">inputType</span>: <span class="type">Substring</span>.<span class="type">UTF8View</span>.<span class="type">Type</span> = <span class="variable">Substring</span>.<span class="type">UTF8View</span>.<span class="keyword">self</span>,
     <span class="variable">isSigned</span>: <span class="type">Bool</span> = <span class="keyword">true</span>,
-    <span class="variable">radix</span>: <span class="keyword">Self</span> = <span class="number literal">10</span>
-  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">IntParser</span>&lt;<span class="type">Input</span>, <span class="keyword">Self</span>&gt;  </body></html></code></pre>
+    <span class="variable">radix</span>: <span class="type">Int</span> = <span class="number literal">10</span>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">IntParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>, <span class="keyword">Self</span>&gt;  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A parser that consumes an integer (with an optional leading <code>+</code> or <code>-</code> sign) from the
@@ -145,7 +145,7 @@ beginning of a substring's UTF-8 view.</p>
 </tr>
 <tr>
     <th>radix</th>
-    <td><code class="type">Self</code></td>
+    <td><code class="type">Int</code></td>
     <td><p>The radix, or base, to use for converting text to an integer value. <code>radix</code> must be in the range <code>2...36</code>.</p>
 </td>
 </tr>
@@ -165,8 +165,8 @@ beginning of a substring's UTF-8 view.</p>
   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">parser</span>(
     <span class="variable">of</span> <span class="variable">inputType</span>: <span class="type">Substring</span>.<span class="type">Type</span> = <span class="variable">Substring</span>.<span class="keyword">self</span>,
     <span class="variable">isSigned</span>: <span class="type">Bool</span> = <span class="keyword">true</span>,
-    <span class="variable">radix</span>: <span class="keyword">Self</span> = <span class="number literal">10</span>
-  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">UTF8ViewToSubstring</span>&lt;<a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">IntParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>, <span class="keyword">Self</span>&gt;&gt;  </body></html></code></pre>
+    <span class="variable">radix</span>: <span class="type">Int</span> = <span class="number literal">10</span>
+  ) -&gt; <a href="/swift-parsing/FromUTF8View"><span class="type">FromUTF8View</span></a>&lt;<span class="type">Substring</span>, <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">IntParser</span>&lt;<span class="type">Substring</span>.<span class="type">UTF8View</span>, <span class="keyword">Self</span>&gt;&gt;  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A parser that consumes an integer (with an optional leading <code>+</code> or <code>-</code> sign) from the
@@ -202,7 +202,7 @@ beginning of a substring.</p>
 </tr>
 <tr>
     <th>radix</th>
-    <td><code class="type">Self</code></td>
+    <td><code class="type">Int</code></td>
     <td><p>The radix, or base, to use for converting text to an integer value. <code>radix</code> must be in the range <code>2...36</code>.</p>
 </td>
 </tr>
@@ -218,7 +218,7 @@ beginning of a substring.</p>
 
     <footer>
         <p>
-    Generated on <time datetime="2022-01-06T15:12:52+0000">January 6, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2022-01-24T18:11:11+0000">January 24, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
