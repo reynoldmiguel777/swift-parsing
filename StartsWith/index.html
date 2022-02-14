@@ -37,10 +37,7 @@
 </h1>
 
 <div class="declaration">
-<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">StartsWith</span>&lt;<span class="variable">Input</span>&gt;: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>
-<span class="keyword">where</span>
-  <span class="type">Input</span>: <span class="type">Collection</span>,
-  <span class="type">Input</span>.<span class="type">SubSequence</span> == <span class="type">Input</span></body></html></code></pre>
+<pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">StartsWith</span>&lt;<span class="variable">Input</span>: <span class="type">Collection</span>&gt;: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a> <span class="keyword">where</span> <span class="type">Input</span>.<span class="type">SubSequence</span> == <span class="type">Input</span>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
     <p>A parser that parses a sequence of elements from its input.</p>
@@ -54,27 +51,29 @@ starts with a given subsequence by calling this method under the hood.</p>
 
 <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">input</span> = <span class="string literal">"</span><span class="string literal">Hello, Blob!</span><span class="string literal">"</span>[...]
 
-<span class="variable">StartsWith</span>(<span class="string literal">"</span><span class="string literal">Hello, </span><span class="string literal">"</span>).<span class="variable">parse</span>(&amp;<span class="variable">input</span>) <span class="comment">// ()</span>
-<span class="variable">input</span>                               <span class="comment">// "Blob!"</span>
+<span class="variable">StartsWith</span>(<span class="string literal">"</span><span class="string literal">Hello, </span><span class="string literal">"</span>).<span class="variable">parse</span>(&amp;<span class="variable">input</span>)  <span class="comment">// ()</span>
+<span class="variable">input</span>                                <span class="comment">// "Blob!"</span>
 </code></pre></body></html>
 <p>If <code>false</code>, it fails and leaves input intact:</p>
 
 <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">input</span> = <span class="string literal">"</span><span class="string literal">Goodnight, Blob!</span><span class="string literal">"</span>[...]
-<span class="variable">StartsWith</span>(<span class="string literal">"</span><span class="string literal">Hello, </span><span class="string literal">"</span>).<span class="variable">parse</span>(&amp;<span class="variable">input</span>) <span class="comment">// nil</span>
-<span class="variable">input</span>                               <span class="comment">// "Goodnight, Blob!"</span>
+<span class="keyword">try</span> <span class="variable">StartsWith</span>(<span class="string literal">"</span><span class="string literal">Hello, </span><span class="string literal">"</span>).<span class="variable">parse</span>(&amp;<span class="variable">input</span>)
+<span class="comment">// error: unexpected input</span>
+<span class="comment">//  --&gt; input:1:1</span>
+<span class="comment">// 1 | Goodnight, Blob!</span>
+<span class="comment">//   | ^ expected "Hello, "</span>
 </code></pre></body></html>
 <p>This parser returns <code>Void</code> and <em>not</em> the sequence of elements it consumes because the sequence
 is already known at the time the parser is created (it is the value quite literally passed to
-<code>StartsWith/init(_:)</code>). This means <code>StartsWith</code> plays nicely when chained into the
-<code>Parser/take(_:)-1fw8y</code> operation, which will discard the <code>Void</code> output.</p>
+<code>StartsWith/init(_:)</code>).</p>
 
-<p>In many circumstances you can elide the <code>StartsWith</code> parser entirely and just use the collection
+<p>In many circumstances you can omit the <code>StartsWith</code> parser entirely and just use the collection
 as the parser. For example:</p>
 
 <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">input</span> = <span class="string literal">"</span><span class="string literal">Hello, Blob!</span><span class="string literal">"</span>[...]
 
-<span class="string literal">"</span><span class="string literal">Hello, </span><span class="string literal">"</span>.<span class="variable">parse</span>(&amp;<span class="variable">input</span>) <span class="comment">// ()</span>
-<span class="variable">input</span>                   <span class="comment">// "Blob!"</span>
+<span class="keyword">try</span> <span class="string literal">"</span><span class="string literal">Hello, </span><span class="string literal">"</span>.<span class="variable">parse</span>(&amp;<span class="variable">input</span>)  <span class="comment">// ()</span>
+<span class="variable">input</span>                        <span class="comment">// "Blob!"</span>
 </code></pre></body></html>
 </div>
 <section id="relationships">
@@ -85,11 +84,11 @@ as the parser. For example:</p>
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Generated by graphviz version 2.40.1 (20161225.0304)
  -->
-<!-- Title: %71 Pages: 1 -->
+<!-- Title: %821 Pages: 1 -->
 <svg width="872pt" height="116pt"
  viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
-<title>%71</title>
+<title>%821</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
 <!-- StartsWith -->
 <g id="node1" class="node structure current">
@@ -124,8 +123,7 @@ as the parser. For example:</p>
         <h3>Conforms To</h3>
 <dl>
     <dt class="protocol"><code><a href="/swift-parsing/Parser">Parser</a></code></dt>
-<dd><p>Declares a type that can parse an <code>Input</code> value into an <code>Output</code> value.</p>
-</dd>
+<dd></dd>
 </dl>
 </section>
     <section id="initializers">
@@ -215,7 +213,7 @@ equivalence test.</p>
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
-  <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <span class="type">Input</span>) -&gt; <span class="type">Void</span>?  </body></html></code></pre>
+  <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <span class="type">Input</span>) <span class="keyword">throws</span>  </body></html></code></pre>
 </div>
 </div>
     </section>
@@ -227,7 +225,7 @@ equivalence test.</p>
 
     <footer>
         <p>
-    Generated on <time datetime="2022-02-09T19:21:24+0000">February 9, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2022-02-14T16:16:45+0000">February 14, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>

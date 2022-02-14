@@ -40,16 +40,66 @@
 <pre class="highlight"><code><html><body><span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Always</span>&lt;<span class="variable">Input</span>, <span class="variable">Output</span>&gt;: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>  </body></html></code></pre>
 </div>
 <div class="summary" role="doc-abstract">
-    <p>A parser that always succeeds by returning the provided value, but does not consume any of its
-input.</p>
+    <p>A parser that always succeeds with the given value, and does not consume any input.</p>
 
 </div>
 <div class="discussion">
-    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">input</span> = <span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>[...]
-<span class="keyword">let</span> <span class="variable">output</span> = <span class="variable">Always</span>(<span class="number literal">1</span>).<span class="variable">parse</span>(&amp;<span class="variable">hello</span>)
-<span class="variable">precondition</span>(<span class="variable">output</span> == <span class="number literal">1</span>)
-<span class="variable">precondition</span>(<span class="variable">input</span> == <span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>)
+    <p>While not very useful on its own, the <code>Always</code> parser can be helpful when combined with other
+parsers or operators.</p>
+
+<p>When its <code>Output</code> is <code>Void</code>, it can be used as a &quot;no-op&quot; parser of sorts and be plugged into
+other parser operations. For example, the <code>Many</code> parser can be configured with separator and
+terminator parsers:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Many</span> {
+  <span class="variable">Int</span>.<span class="variable">parser</span>()
+} <span class="variable">separator</span>: {
+  <span class="string literal">"</span><span class="string literal">,</span><span class="string literal">"</span>
+} <span class="variable">terminator</span>: {
+  <span class="variable">End</span>()
+}
 </code></pre></body></html>
+<p>But also exposes initializers that omit these parsers when there is no separator or terminator
+to be parsed:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Many</span> {
+  <span class="variable">Prefix</span> { <span class="variable">$0</span> != <span class="string literal">"</span><span class="string literal">\n</span><span class="string literal">"</span> }
+  <span class="string literal">"</span><span class="string literal">\n</span><span class="string literal">"</span>
+}
+</code></pre></body></html>
+<p>To support this, <code>Many</code> plugs <code>Always&lt;Input, Void&gt;</code> into each omitted parser. As a simplified
+example:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <a href="/swift-parsing/Many"><span class="type">Many</span></a>&lt;<span class="variable">Element</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>, <span class="variable">Separator</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>, <span class="variable">Terminator</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>&gt;: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>
+<span class="keyword">where</span> <span class="type">Separator</span>.<span class="type">Input</span> == <span class="type">Element</span>.<span class="type">Input</span>, <span class="type">Terminator</span>.<span class="type">Input</span> == <span class="type">Element</span>.<span class="type">Input</span> {
+  ...
+}
+
+<span class="keyword">extension</span> <a href="/swift-parsing/Many"><span class="type">Many</span></a> <span class="keyword">where</span> <span class="type">Separator</span> == <span class="type">Always</span>&lt;<span class="type">Input</span>, <span class="type">Void</span>&gt;, <span class="type">Terminator</span> == <span class="type">Always</span>&lt;<span class="type">Input</span>, <span class="type">Void</span>&gt; {
+  <span class="keyword">init</span>(<span class="attribute">@</span><a href="/swift-parsing/ParserBuilder"><span class="type">ParserBuilder</span></a> <span class="variable">element</span>: () -&gt; <span class="type">Element</span>) {
+    <span class="keyword">self</span>.<span class="variable">element</span> = <span class="variable">element</span>()
+    <span class="keyword">self</span>.<span class="variable">separator</span> = <span class="variable">Always</span>(())
+    <span class="keyword">self</span>.<span class="variable">terminator</span> = <span class="variable">Always</span>(())
+  }
+}
+</code></pre></body></html>
+<p>This means the previous example is equivalent to:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Many</span> {
+  <span class="variable">Prefix</span> { <span class="variable">$0</span> != <span class="string literal">"</span><span class="string literal">\n</span><span class="string literal">"</span> }
+  <span class="string literal">"</span><span class="string literal">\n</span><span class="string literal">"</span>
+} <span class="variable">separator</span>: {
+  <span class="variable">Always</span>(())
+} <span class="variable">terminator</span>: {
+  <span class="variable">Always</span>(())
+}
+</code></pre></body></html>
+<blockquote>
+<p>Note: While <code>Always</code> can be used as the last alternative of a <code>OneOf</code> to specify a default
+output, the resulting parser will be throwing. Instead, prefer <code>Parser/replaceError(with:)</code>,
+which returns a non-throwing parser.</p>
+</blockquote>
+
 </div>
 <section id="relationships">
     <h2 hidden>Relationships</h2>
@@ -59,11 +109,11 @@ input.</p>
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Generated by graphviz version 2.40.1 (20161225.0304)
  -->
-<!-- Title: %783 Pages: 1 -->
+<!-- Title: %965 Pages: 1 -->
 <svg width="872pt" height="116pt"
  viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
-<title>%783</title>
+<title>%965</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
 <!-- Always -->
 <g id="node1" class="node structure current">
@@ -98,8 +148,7 @@ input.</p>
         <h3>Conforms To</h3>
 <dl>
     <dt class="protocol"><code><a href="/swift-parsing/Parser">Parser</a></code></dt>
-<dd><p>Declares a type that can parse an <code>Input</code> value into an <code>Output</code> value.</p>
-</dd>
+<dd></dd>
 </dl>
 </section>
     <section id="initializers">
@@ -136,7 +185,7 @@ input.</p>
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
-  <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <span class="type">Input</span>) -&gt; <span class="type">Output</span>?  </body></html></code></pre>
+  <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <span class="type">Input</span>) -&gt; <span class="type">Output</span>  </body></html></code></pre>
 </div>
 </div>
 <div role="article" class="function" id="always.map(_:)">
@@ -159,7 +208,7 @@ input.</p>
 
     <footer>
         <p>
-    Generated on <time datetime="2022-02-09T19:21:25+0000">February 9, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2022-02-14T16:16:46+0000">February 14, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>

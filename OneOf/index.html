@@ -44,7 +44,12 @@
 
 </div>
 <div class="discussion">
-    <html><body><pre class="highlight"><code><span class="keyword">enum</span> <span class="type">Currency</span> { <span class="keyword">case</span> <span class="variable">eur</span>, <span class="variable">gbp</span>, <span class="variable">usd</span> }
+    <p>Use this parser to list out a number of parsers in a <code>OneOfBuilder</code> result builder block.</p>
+
+<p>The following example uses <code>OneOf</code> to parse an enum value. To do so, it spells out a list of
+parsers to <code>OneOf</code>, one for each case:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">enum</span> <span class="type">Currency</span> { <span class="keyword">case</span> <span class="variable">eur</span>, <span class="variable">gbp</span>, <span class="variable">usd</span> }
 
 <span class="keyword">let</span> <span class="variable">currency</span> = <span class="variable">OneOf</span> {
   <span class="string literal">"</span><span class="string literal">€</span><span class="string literal">"</span>.<span class="variable">map</span> { <span class="variable">Currency</span>.<span class="variable">eur</span> }
@@ -52,8 +57,26 @@
   <span class="string literal">"</span><span class="string literal">$</span><span class="string literal">"</span>.<span class="variable">map</span> { <span class="variable">Currency</span>.<span class="variable">usd</span> }
 }
 </code></pre></body></html>
-<p>If you are optionally parsing input that should coalesce into some default, you can skip the
-optionality and instead use <code>OneOf</code> with an <code>Always</code> parser, given a default:</p>
+<p>This parser fails if every parser inside fails:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">input</span> = <span class="string literal">"</span><span class="string literal">London, Hello!</span><span class="string literal">"</span>[...]
+<span class="keyword">try</span> <span class="variable">OneOf</span> { <span class="string literal">"</span><span class="string literal">New York</span><span class="string literal">"</span>; <span class="string literal">"</span><span class="string literal">Berlin</span><span class="string literal">"</span> }.<span class="variable">parse</span>(&amp;<span class="variable">input</span>)
+
+<span class="comment">// error: multiple failures occurred</span>
+<span class="comment">//</span>
+<span class="comment">// error: unexpected input</span>
+<span class="comment">//  --&gt; input:1:1</span>
+<span class="comment">// 1 | London, Hello!</span>
+<span class="comment">//   | ^ expected "New York"</span>
+<span class="comment">//</span>
+<span class="comment">// error: unexpected input</span>
+<span class="comment">//  --&gt; input:1:1</span>
+<span class="comment">// 1 | London, Hello!</span>
+<span class="comment">//   | ^ expected "Berlin"</span>
+</code></pre></body></html>
+<p>If you are parsing input that should coalesce into some default, avoid using a final <code>Always</code>
+parser, and instead opt for a trailing <code>replaceError(with:)</code>, which returns a parser that
+cannot fail:</p>
 
 <html><body><pre class="highlight"><code><span class="keyword">enum</span> <span class="type">Currency</span> { <span class="keyword">case</span> <span class="variable">eur</span>, <span class="variable">gbp</span>, <span class="variable">usd</span>, <span class="variable">unknown</span> }
 
@@ -61,30 +84,33 @@ optionality and instead use <code>OneOf</code> with an <code>Always</code> parse
   <span class="string literal">"</span><span class="string literal">€</span><span class="string literal">"</span>.<span class="variable">map</span> { <span class="variable">Currency</span>.<span class="variable">eur</span> }
   <span class="string literal">"</span><span class="string literal">£</span><span class="string literal">"</span>.<span class="variable">map</span> { <span class="variable">Currency</span>.<span class="variable">gbp</span> }
   <span class="string literal">"</span><span class="string literal">$</span><span class="string literal">"</span>.<span class="variable">map</span> { <span class="variable">Currency</span>.<span class="variable">usd</span> }
-  <span class="variable">Always</span>(<span class="variable">Currency</span>.<span class="variable">unknown</span>)
 }
+.<span class="variable">replaceError</span>(<span class="variable">with</span>: <span class="type">Currency</span>.<span class="variable">unknown</span>)
+
+<span class="variable">currency</span>.<span class="variable">parse</span>(<span class="string literal">"</span><span class="string literal">$</span><span class="string literal">"</span>)  <span class="comment">// Currency.usd</span>
+<span class="variable">currency</span>.<span class="variable">parse</span>(<span class="string literal">"</span><span class="string literal">฿</span><span class="string literal">"</span>)  <span class="comment">// Currency.unknown</span>
 </code></pre></body></html>
 <h1>Backtracking</h1>
 
 <p><code>OneOf</code> will automatically revert any changes made to input when one of its parsers fails. This
-process is often called &quot;backtracking&quot;, and simplifies the logic of other parsers by not forcing them
-to be responsible for their own backtracking when they fail.</p>
+process is often called &quot;backtracking&quot;, and simplifies the logic of other parsers by not forcing
+them to be responsible for their own backtracking when they fail.</p>
 
-<p>If used naively, backtracking can lead to less performant parsing code. For example, if we wanted to parse
-two integers from a string that were separated by either a dash &quot;-&quot; or slash &quot;/&quot;, then we could write this
-as:</p>
+<p>If used naively, backtracking can lead to less performant parsing code. For example, if we
+wanted to parse two integers from a string that were separated by either a dash &quot;-&quot; or slash
+&quot;/&quot;, then we could write this as:</p>
 
 <html><body><pre class="highlight"><code><span class="variable">OneOf</span> {
   <span class="variable">Parser</span> { <span class="variable">Int</span>.<span class="variable">parser</span>(); <span class="string literal">"</span><span class="string literal">-</span><span class="string literal">"</span>; <span class="variable">Int</span>.<span class="variable">parser</span>() } <span class="comment">// 1️⃣</span>
   <span class="variable">Parser</span> { <span class="variable">Int</span>.<span class="variable">parser</span>(); <span class="string literal">"</span><span class="string literal">/</span><span class="string literal">"</span>; <span class="variable">Int</span>.<span class="variable">parser</span>() } <span class="comment">// 2️⃣</span>
 }
 </code></pre></body></html>
-<p>However, parsing slash-separated integers is not going to be performant because it will first run the
-entire 1️⃣ parser until it fails, then backtrack to the beginning, and run the 2️⃣ parser. In particular,
-the first integer will get parsed twice, unnecessarily repeating that work.</p>
+<p>However, parsing slash-separated integers is not going to be performant because it will first
+run the entire 1️⃣ parser until it fails, then backtrack to the beginning, and run the 2️⃣ parser.
+In particular, the first integer will get parsed twice, unnecessarily repeating that work.</p>
 
-<p>On the other hand, we can factor out the common work of the parser and localize the backtracking <code>OneOf</code>
-work to make a much more performant parser:</p>
+<p>On the other hand, we can factor out the common work of the parser and localize the backtracking
+<code>OneOf</code> work to make a much more performant parser:</p>
 
 <html><body><pre class="highlight"><code><span class="variable">Parse</span> {
   <span class="variable">Int</span>.<span class="variable">parser</span>()
@@ -101,11 +127,11 @@ work to make a much more performant parser:</p>
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Generated by graphviz version 2.40.1 (20161225.0304)
  -->
-<!-- Title: %995 Pages: 1 -->
+<!-- Title: %929 Pages: 1 -->
 <svg width="872pt" height="116pt"
  viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
-<title>%995</title>
+<title>%929</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
 <!-- OneOf -->
 <g id="node1" class="node structure current">
@@ -140,8 +166,7 @@ work to make a much more performant parser:</p>
         <h3>Conforms To</h3>
 <dl>
     <dt class="protocol"><code><a href="/swift-parsing/Parser">Parser</a></code></dt>
-<dd><p>Declares a type that can parse an <code>Input</code> value into an <code>Output</code> value.</p>
-</dd>
+<dd></dd>
 </dl>
 </section>
     <section id="initializers">
@@ -178,7 +203,7 @@ work to make a much more performant parser:</p>
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
-  <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">Input</span>) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">Output</span>?  </body></html></code></pre>
+  <span class="keyword">public</span> <span class="keyword">func</span> <span class="function">parse</span>(<span class="keyword">_</span> <span class="variable">input</span>: <span class="keyword">inout</span> <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">Input</span>) <span class="keyword">rethrows</span> -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">Output</span>  </body></html></code></pre>
 </div>
 </div>
     </section>
@@ -190,7 +215,7 @@ work to make a much more performant parser:</p>
 
     <footer>
         <p>
-    Generated on <time datetime="2022-02-09T19:21:26+0000">February 9, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2022-02-14T16:16:46+0000">February 14, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>

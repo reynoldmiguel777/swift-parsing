@@ -59,7 +59,11 @@ one after the other, and accumulates their outputs.</p>
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
-  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>) -&gt; <span class="type">P</span> <span class="keyword">where</span> <span class="type">P</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>  </body></html></code></pre>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">P</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>) -&gt; <span class="type">P</span>  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Provides support for specifying a parser in <code>ParserBuilder</code> blocks.</p>
+
 </div>
 </div>
 <div role="article" class="function" id="parserbuilder.buildeither(first:)">
@@ -70,7 +74,24 @@ one after the other, and accumulates their outputs.</p>
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildEither</span>&lt;<span class="variable">TrueParser</span>, <span class="variable">FalseParser</span>&gt;(
     <span class="variable">first</span> <span class="variable">parser</span>: <span class="type">TrueParser</span>
-  ) -&gt; <a href="/swift-parsing/Conditional"><span class="type">Conditional</span></a>&lt;<span class="type">TrueParser</span>, <span class="type">FalseParser</span>&gt;  </body></html></code></pre>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">Conditional</span>&lt;<span class="type">TrueParser</span>, <span class="type">FalseParser</span>&gt;  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Provides support for <code>if</code>-<code>else</code> statements in <code>ParserBuilder</code> blocks, producing a
+conditional parser for the <code>if</code> branch.</p>
+
+</div>
+<div class="discussion">
+    <html><body><pre class="highlight"><code><span class="variable">Parse</span> {
+  <span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>
+  <span class="keyword">if</span> <span class="variable">shouldParseComma</span> {
+    <span class="string literal">"</span><span class="string literal">, </span><span class="string literal">"</span>
+  } <span class="keyword">else</span> {
+    <span class="string literal">"</span><span class="string literal"> </span><span class="string literal">"</span>
+  }
+  <span class="variable">Rest</span>()
+}
+</code></pre></body></html>
 </div>
 </div>
 <div role="article" class="function" id="parserbuilder.buildeither(second:)">
@@ -81,7 +102,24 @@ one after the other, and accumulates their outputs.</p>
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildEither</span>&lt;<span class="variable">TrueParser</span>, <span class="variable">FalseParser</span>&gt;(
     <span class="variable">second</span> <span class="variable">parser</span>: <span class="type">FalseParser</span>
-  ) -&gt; <a href="/swift-parsing/Conditional"><span class="type">Conditional</span></a>&lt;<span class="type">TrueParser</span>, <span class="type">FalseParser</span>&gt;  </body></html></code></pre>
+  ) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">Conditional</span>&lt;<span class="type">TrueParser</span>, <span class="type">FalseParser</span>&gt;  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Provides support for <code>if</code>-<code>else</code> statements in <code>ParserBuilder</code> blocks, producing a
+conditional parser for the <code>else</code> branch.</p>
+
+</div>
+<div class="discussion">
+    <html><body><pre class="highlight"><code><span class="variable">Parse</span> {
+  <span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>
+  <span class="keyword">if</span> <span class="variable">shouldParseComma</span> {
+    <span class="string literal">"</span><span class="string literal">, </span><span class="string literal">"</span>
+  } <span class="keyword">else</span> {
+    <span class="string literal">"</span><span class="string literal"> </span><span class="string literal">"</span>
+  }
+  <span class="variable">Rest</span>()
+}
+</code></pre></body></html>
 </div>
 </div>
 <div role="article" class="function" id="parserbuilder.buildif(_:)">
@@ -90,7 +128,12 @@ one after the other, and accumulates their outputs.</p>
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
-  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildIf</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?) -&gt; <span class="type">P</span>? <span class="keyword">where</span> <span class="type">P</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>  </body></html></code></pre>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildIf</span>&lt;<span class="variable">P</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?) -&gt; <span class="type">P</span>?  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Provides support for <code>if</code> statements in <code>ParserBuilder</code> blocks, producing an optional
+parser.</p>
+
 </div>
 </div>
 <div role="article" class="function" id="parserbuilder.buildif(_:)">
@@ -101,6 +144,22 @@ one after the other, and accumulates their outputs.</p>
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildIf</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OptionalVoid</span>&lt;<span class="type">P</span>&gt;  </body></html></code></pre>
 </div>
+<div class="summary" role="doc-abstract">
+    <p>Provides support for <code>if</code> statements in <code>ParserBuilder</code> blocks, producing a void parser for
+a given void parser.</p>
+
+</div>
+<div class="discussion">
+    <html><body><pre class="highlight"><code><span class="variable">Parse</span> {
+  <span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>
+  <span class="keyword">if</span> <span class="variable">shouldParseComma</span> {
+    <span class="string literal">"</span><span class="string literal">,</span><span class="string literal">"</span>
+  }
+  <span class="string literal">"</span><span class="string literal"> </span><span class="string literal">"</span>
+  <span class="variable">Rest</span>()
+}
+</code></pre></body></html>
+</div>
 </div>
 <div role="article" class="function" id="parserbuilder.buildlimitedavailability(_:)">
     <h3>
@@ -108,7 +167,12 @@ one after the other, and accumulates their outputs.</p>
     </h3>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
-  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildLimitedAvailability</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?) -&gt; <span class="type">P</span>? <span class="keyword">where</span> <span class="type">P</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>  </body></html></code></pre>
+  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildLimitedAvailability</span>&lt;<span class="variable">P</span>: <a href="/swift-parsing/Parser"><span class="type">Parser</span></a>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?) -&gt; <span class="type">P</span>?  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Provides support for <code>if #available</code> statements in <code>ParserBuilder</code> blocks, producing an
+optional parser.</p>
+
 </div>
 </div>
 <div role="article" class="function" id="parserbuilder.buildlimitedavailability(_:)">
@@ -118,6 +182,11 @@ one after the other, and accumulates their outputs.</p>
     <div class="declaration">
 <pre class="highlight"><code><html><body><span class="attribute">@</span><span class="attribute">inlinable</span>
   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildLimitedAvailability</span>&lt;<span class="variable">P</span>&gt;(<span class="keyword">_</span> <span class="variable">parser</span>: <span class="type">P</span>?) -&gt; <a href="/swift-parsing/Parsers"><span class="type">Parsers</span></a>.<span class="type">OptionalVoid</span>&lt;<span class="type">P</span>&gt;  </body></html></code></pre>
+</div>
+<div class="summary" role="doc-abstract">
+    <p>Provides support for <code>if #available</code> statements in <code>ParserBuilder</code> blocks, producing a void
+parser for a given void parser.</p>
+
 </div>
 </div>
 <div role="article" class="function" id="parserbuilder.buildblock(_:_:)">
@@ -1369,7 +1438,7 @@ one after the other, and accumulates their outputs.</p>
 
     <footer>
         <p>
-    Generated on <time datetime="2022-02-09T19:21:25+0000">February 9, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2022-02-14T16:16:45+0000">February 14, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>

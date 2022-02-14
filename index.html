@@ -50,6 +50,15 @@ create a parser for the given input.</p>
         <h2>Structures</h2>
         <dl>
             <dt class="structure">
+    <a href="/swift-parsing/OneOfBuilder_OptionalOneOf" title="structure - OneOfBuilder.OptionalOneOf">
+        One​OfBuilder.​Optional​One​Of
+    </a>
+</dt>
+<dd>
+    <p>A parser that parses output from an optional parser.</p>
+
+</dd>
+<dt class="structure">
     <a href="/swift-parsing/Parsers_ZipOO" title="structure - Parsers.ZipOO">
         Parsers.​Zip​OO
     </a>
@@ -1114,149 +1123,12 @@ create a parser for the given input.</p>
     
 </dd>
 <dt class="structure">
-    <a href="/swift-parsing/Parsers_OneOf" title="structure - Parsers.OneOf">
-        Parsers.​One​Of
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_OptionalParser" title="structure - Parsers.OptionalParser">
-        Parsers.​Optional​Parser
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_SkipFirst" title="structure - Parsers.SkipFirst">
-        Parsers.​Skip​First
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_SkipSecond" title="structure - Parsers.SkipSecond">
-        Parsers.​Skip​Second
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_SubstringToUnicodeScalars" title="structure - Parsers.SubstringToUnicodeScalars">
-        Parsers.​Substring​ToUnicode​Scalars
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_UTF8ViewToSubstring" title="structure - Parsers.UTF8ViewToSubstring">
-        Parsers.​UTF8View​ToSubstring
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take2" title="structure - Parsers.Take2">
-        Parsers.​Take2
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take3" title="structure - Parsers.Take3">
-        Parsers.​Take3
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take4" title="structure - Parsers.Take4">
-        Parsers.​Take4
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take5" title="structure - Parsers.Take5">
-        Parsers.​Take5
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take6" title="structure - Parsers.Take6">
-        Parsers.​Take6
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take7" title="structure - Parsers.Take7">
-        Parsers.​Take7
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take8" title="structure - Parsers.Take8">
-        Parsers.​Take8
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take9" title="structure - Parsers.Take9">
-        Parsers.​Take9
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take10" title="structure - Parsers.Take10">
-        Parsers.​Take10
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/Parsers_Take11" title="structure - Parsers.Take11">
-        Parsers.​Take11
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
-    <a href="/swift-parsing/FirstWhere" title="structure - FirstWhere">
-        First​Where
-    </a>
-</dt>
-<dd>
-    
-</dd>
-<dt class="structure">
     <a href="/swift-parsing/Always" title="structure - Always">
         Always
     </a>
 </dt>
 <dd>
-    <p>A parser that always succeeds by returning the provided value, but does not consume any of its
-input.</p>
+    <p>A parser that always succeeds with the given value, and does not consume any input.</p>
 
 </dd>
 <dt class="structure">
@@ -1536,12 +1408,22 @@ elements.</p>
 
 </dd>
 <dt class="structure">
+    <a href="/swift-parsing/Parsers_ReplaceError" title="structure - Parsers.ReplaceError">
+        Parsers.​Replace​Error
+    </a>
+</dt>
+<dd>
+    <p>A parser that replaces its error with a provided output.</p>
+
+</dd>
+<dt class="structure">
     <a href="/swift-parsing/Rest" title="structure - Rest">
         Rest
     </a>
 </dt>
 <dd>
-    <p>A parser that consumes everything to the end of the collection and returns it as its output.</p>
+    <p>A parser that consumes everything to the end of the collection and returns this subsequence as
+its output.</p>
 
 </dd>
 <dt class="structure">
@@ -1615,8 +1497,8 @@ one after the other, and accumulates their outputs.</p>
 
 </dd>
 <dt class="enumeration">
-    <a href="/swift-parsing/Conditional" title="enumeration - Conditional">
-        Conditional
+    <a href="/swift-parsing/Parsers_Conditional" title="enumeration - Parsers.Conditional">
+        Parsers.​Conditional
     </a>
 </dt>
 <dd>
@@ -1643,8 +1525,7 @@ one after the other, and accumulates their outputs.</p>
     </a>
 </dt>
 <dd>
-    <p>Declares a type that can parse an <code>Input</code> value into an <code>Output</code> value.</p>
-
+    
 </dd>
         </dl>
     </section>
@@ -1652,8 +1533,8 @@ one after the other, and accumulates their outputs.</p>
         <h2>Typealiases</h2>
         <dl>
             <dt class="typealias">
-    <a href="/swift-parsing/OneOfMany" title="typealias - OneOfMany">
-        One​OfMany
+    <a href="/swift-parsing/Conditional" title="typealias - Conditional">
+        Conditional
     </a>
 </dt>
 <dd>
@@ -1719,7 +1600,7 @@ one after the other, and accumulates their outputs.</p>
 
     <footer>
         <p>
-    Generated on <time datetime="2022-02-09T19:21:23+0000">February 9, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
+    Generated on <time datetime="2022-02-14T16:16:44+0000">February 14, 2022</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-rc.1</span>.
 </p>
     </footer>
 </body>
